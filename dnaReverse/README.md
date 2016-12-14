@@ -1,1 +1,1 @@
-# Java-MapReduce-Dna-Reverse
+# Java-MapReduce-Anagrams

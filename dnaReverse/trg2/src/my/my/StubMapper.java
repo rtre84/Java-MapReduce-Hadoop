@@ -55,19 +55,27 @@ public class StubMapper  extends Mapper <Object, Text, Text, Text> {
 	 public void map(Object key, Text value, Context context) throws IOException, InterruptedException{
 		 
 		 if (value !=null  && value.toString() !=null) {
-			 String sequence1 = value.toString();
-			 String sequence2 = (new StringBuilder(sequence1)).reverse().toString();
-			 
-			 String newKey = null;
-			 
-			 if (sequence1.compareTo(sequence2) ==-1) {
-					newKey = sequence1;
-			 }
-			 else {
-					newKey = sequence2;
-			 }		
+			 if (value !=null  && value.toString() !=null) {
+				 String[] dNASeq1 = value.toString().split(" ");
+				 char[] chars = dNASeq1[1].toCharArray();
 				 
-			 context.write(new Text(newKey), new Text(sequence1));
-		}
-	 }
+//				 String newKey = null;
+
+				 Arrays.sort(chars);
+				 Text newKey = new Text();
+				 newKey.set(new String(chars));
+
+//				 newKey = dNASeq1[1];
+//				 if (dNASeq1[1].compareTo(dNASeq2) == -1) {
+//					newKey = dNASeq1[1];
+//				 }else
+//					 newKey = dNASeq2;
+					 
+				 context.write(new Text(newKey), new Text(dNASeq1[0]));
+		
+			 }
+		 }
+	 }	 
 }
+
+	 
